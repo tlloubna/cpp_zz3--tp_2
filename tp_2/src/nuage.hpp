@@ -14,6 +14,7 @@ class Nuage{
     public:
         using iterator =typename std::vector<T>::iterator;
         using const_iterator=typename std::vector<T>::const_iterator;
+        using value_type = typename std::vector<T>::value_type;
         Nuage()=default;
         //l'ajout des points 
         void ajouter(const T & t) {
@@ -83,6 +84,26 @@ Polaire barycentre_v1<Polaire>(const Nuage<Polaire> & nuage) {
     
     
 }
+//barycentre_v2
+template <typename C> typename C::value_type barycentre_v2(const C & container) {
+ Cartesien c;
+ double x = 0.0;
+ double y = 0.0;
+ int n = 0;
+    
+using point_t = typename C::value_type;
+
+ // Boucle C++ moderne
+ for (const point_t & p : container) {
+  c=Cartesien(p);
+  x+=c.getX();
+  y+=c.getY();
+  ++n;
+ }
+
+ return (n==0 ? point_t() : point_t(Cartesien(x/n,y/n)));
+}
+
 
 #endif
 
